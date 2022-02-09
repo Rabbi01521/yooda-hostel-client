@@ -87,17 +87,28 @@ const BasicTable = () => {
 
   console.log(pageIndex);
 
-  //   useEffect(() => {
-  //     const update = () => {
-  //       if ((pageIndex + 1) * 10 > students.length) {
-  //         setToRender(students.slice(pageIndex * 10, students.length));
-  //       } else {
-  //         setToRender(students.slice(pageIndex * 10, (pageIndex + 1) * 10));
-  //       }
-  //     };
-  //     update();
-  //     console.log(toRender);
-  //   }, [pageIndex, students, toRender]);
+  const handleStatus = () => {
+    const status = [];
+
+    for (let i = 0; i < selectedFlatRows.length; i++) {
+      status.push(selectedFlatRows[i].original._id);
+    }
+    console.log(status);
+
+    fetch("http://localhost:5000/student-invert-status", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(status),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          alert("Successfully added The student");
+        }
+      });
+  };
 
   return (
     <>
@@ -126,6 +137,11 @@ const BasicTable = () => {
           })}
         </tbody>
       </table>
+      {Object.keys(selectedRowIds).length > 0 && (
+        <button style={{}} onClick={handleStatus}>
+          Change Status
+        </button>
+      )}
       <div style={{ marginTop: "10px" }}>
         <span>
           page{" "}
