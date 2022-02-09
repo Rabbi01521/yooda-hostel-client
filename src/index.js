@@ -6,10 +6,10 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
-  <React.StrictMode>
+  <>
     <CssBaseline />
     <App />
-  </React.StrictMode>,
+  </>,
   document.getElementById("root")
 );
 
