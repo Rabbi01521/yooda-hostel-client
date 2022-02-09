@@ -18,6 +18,8 @@ const BasicTable = () => {
       status: "active",
     },
   ]);
+
+  const [update, setUpdate] = useState(false);
   useEffect(() => {
     fetch("http://localhost:5000/students")
       .then((res) => res.json())
@@ -25,7 +27,7 @@ const BasicTable = () => {
         console.log(data);
         setStudents(data);
       });
-  }, []);
+  }, [update]);
 
   console.log(students);
 
@@ -104,9 +106,7 @@ const BasicTable = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.insertedId) {
-          alert("Successfully added The student");
-        }
+        setUpdate((st) => !st);
       });
   };
 
