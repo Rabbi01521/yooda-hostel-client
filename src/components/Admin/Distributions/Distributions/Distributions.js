@@ -18,7 +18,7 @@ const Distributions = () => {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5000/distribution")
+    fetch("https://evening-stream-09071.herokuapp.com/distribution")
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
