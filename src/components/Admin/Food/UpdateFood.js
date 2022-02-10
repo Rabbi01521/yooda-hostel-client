@@ -7,7 +7,7 @@ const UpdateFood = () => {
   const history = useHistory();
 
   useEffect(() => {
-    const url = `http://localhost:5000/allFoods/${foodId}`;
+    const url = `https://evening-stream-09071.herokuapp.com/allFoods/${foodId}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => setFood(data));
@@ -26,7 +26,7 @@ const UpdateFood = () => {
   };
 
   const handleUpdate = (e) => {
-    const url = `http://localhost:5000/allFoods/${foodId}`;
+    const url = `https://evening-stream-09071.herokuapp.com/allFoods/${foodId}`;
     fetch(url, {
       method: "PUT",
       headers: {

@@ -12,7 +12,7 @@ const AddFood = () => {
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
-    fetch("http://localhost:5000/foods", {
+    fetch("https://evening-stream-09071.herokuapp.com/foods", {
       method: "POST",
       headers: {
         "content-type": "application/json",

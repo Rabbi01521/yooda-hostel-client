@@ -1,4 +1,6 @@
+import { Button } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { usePagination, useRowSelect, useTable } from "react-table";
 import { CheckBox } from "./CheckBox";
 // import useStudents from "../../../hooks/useStudents";
@@ -7,27 +9,37 @@ import "./table.css";
 
 const BasicTable = () => {
   const [students, setStudents] = useState([]);
-  const [toRender, setToRender] = useState([
-    {
-      _id: "6203824e998b7658e52ade4b",
-      name: "Roky",
-      age: "25",
-      roll: "12",
-      class: "12",
-      hall: "CTG",
-      status: "active",
-    },
-  ]);
+  // const [toRender, setToRender] = useState([]);
 
   const [update, setUpdate] = useState(false);
   useEffect(() => {
-    fetch("http://localhost:5000/students")
+    fetch("https://evening-stream-09071.herokuapp.com/students")
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
         setStudents(data);
       });
   }, [update]);
+
+  //   DELETE an food
+  const handleDeleteStudent = (id) => {
+    const proceed = window.confirm("Are you sure, you want to delete?");
+    if (proceed) {
+      const url = `https://evening-stream-09071.herokuapp.com/student/${id}`;
+      fetch(url, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount > 0) {
+            alert("deleted Successfully");
+            const remainingUsers = students.filter((user) => user._id !== id);
+            setStudents(remainingUsers);
+            setUpdate((st) => !st);
+          }
+        });
+    }
+  };
 
   console.log(students);
 
@@ -41,6 +53,53 @@ const BasicTable = () => {
     },
     usePagination,
     useRowSelect,
+    (hooks) => {
+      hooks.visibleColumns.push((columns) => [
+        // Let's make a column for selection
+        {
+          id: "edit",
+          Header: () => (
+            <div>
+              <span>Edit</span>
+            </div>
+          ),
+          Cell: ({ row }) => {
+            console.log(row);
+            return (
+              <div>
+                <Link to={`/student/${row.original._id}`}>Edit</Link>
+              </div>
+            );
+          },
+        },
+        ...columns,
+      ]);
+    },
+    (hooks) => {
+      hooks.visibleColumns.push((columns) => [
+        // Let's make a column for selection
+        {
+          id: "delete",
+
+          Header: () => (
+            <div>
+              <span>Delete</span>
+            </div>
+          ),
+          Cell: ({ row }) => {
+            console.log(row);
+            return (
+              <div>
+                <Button onClick={() => handleDeleteStudent(row.original._id)}>
+                  Delete
+                </Button>
+              </div>
+            );
+          },
+        },
+        ...columns,
+      ]);
+    },
     (hooks) => {
       hooks.visibleColumns.push((columns) => [
         // Let's make a column for selection
@@ -78,13 +137,11 @@ const BasicTable = () => {
     canPreviousPage,
     canNextPage,
     pageOptions,
-    pageCount,
-    gotoPage,
+
     nextPage,
     previousPage,
-    setPageSize,
     selectedFlatRows,
-    state: { pageIndex, pageSize, selectedRowIds },
+    state: { pageIndex, selectedRowIds },
   } = tableInstance;
 
   console.log(pageIndex);
@@ -97,7 +154,7 @@ const BasicTable = () => {
     }
     console.log(status);
 
-    fetch("http://localhost:5000/student-invert-status", {
+    fetch("https://evening-stream-09071.herokuapp.com/student-invert-status", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -156,7 +213,7 @@ const BasicTable = () => {
           Next
         </button>
       </div>
-      <pre>
+      {/* <pre>
         <code>
           {JSON.stringify(
             {
@@ -169,7 +226,7 @@ const BasicTable = () => {
             2
           )}
         </code>
-      </pre>
+      </pre> */}
     </>
   );
 };

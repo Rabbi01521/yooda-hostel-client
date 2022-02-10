@@ -17,14 +17,16 @@ const Food = () => {
   const [toRender, setToRender] = useState([...displayRiders]);
   const [foods, setFoods] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/allFoods")
+    fetch("https://evening-stream-09071.herokuapp.com/allFoods")
       .then((res) => res.json())
       .then((data) => setFoods(data));
   }, []);
 
   const size = 5;
   useEffect(() => {
-    fetch(`http://localhost:5000/food?page=${page}&&size=${size}`)
+    fetch(
+      `https://evening-stream-09071.herokuapp.com/food?page=${page}&&size=${size}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setDisplayFoods(data.foods);
@@ -39,7 +41,7 @@ const Food = () => {
   const handleDeleteUser = (id) => {
     const proceed = window.confirm("Are you sure, you want to delete?");
     if (proceed) {
-      const url = `http://localhost:5000/allFoods/${id}`;
+      const url = `https://evening-stream-09071.herokuapp.com/allFoods/${id}`;
       fetch(url, {
         method: "DELETE",
       })
@@ -56,7 +58,7 @@ const Food = () => {
 
   return (
     <div>
-      <h1>Total Foods: {toRender.length}</h1>
+      {/* <h1>Total Foods: {toRender.length}</h1> */}
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 500 }} size="small" aria-label="a dense table">
           <TableHead>

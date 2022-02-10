@@ -12,7 +12,7 @@ const AddStudent = () => {
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
-    fetch("http://localhost:5000/students", {
+    fetch("https://evening-stream-09071.herokuapp.com/students", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -46,7 +46,7 @@ const AddStudent = () => {
         <br />
         <input
           type="number"
-          {...register("age", { min: 18, max: 30, required: true })}
+          {...register("age", { min: 8, max: 18, required: true })}
         />
         <br />
         {/* errors will return when field validation fails  */}

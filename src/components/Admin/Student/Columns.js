@@ -27,12 +27,12 @@ export const Columns = [
     Header: "Status",
     accessor: "status",
   },
-  {
-    Header: "Edit",
-    accessor: "edit",
-  },
-  {
-    Header: "Delete",
-    accessor: "delete",
-  },
+  // {
+  //   Header: "Edit",
+  //   accessor: "edit",
+  // },
+  // {
+  //   Header: "Delete",
+  //   accessor: "delete",
+  // },
 ];

@@ -171,6 +171,12 @@ const Navbar = () => {
               >
                 Student
               </Link>
+              <Link
+                style={{ color: "white", textDecoration: "none" }}
+                to="/distribution"
+              >
+                Distribution
+              </Link>
             </Box>
           </Toolbar>
         </Container>
