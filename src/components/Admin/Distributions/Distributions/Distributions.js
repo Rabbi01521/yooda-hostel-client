@@ -122,7 +122,12 @@ const Distributions = () => {
         <form onSubmit={onSubmit}>
           <label htmlFor="">Student Id: </label>
           <br />
-          <input onChange={handleChange} name="studentId" type="text" />
+          <input
+            onChange={handleChange}
+            name="studentId"
+            type="text"
+            required
+          />
           <br />
           <label htmlFor="">Date: </label>
           <br />
@@ -140,6 +145,7 @@ const Distributions = () => {
             // onChange={handleStatus}
             name="shift"
             onChange={handleChange}
+            required
           >
             <option value="morning">Morning</option>
             <option value="day">Day</option>
@@ -151,6 +157,7 @@ const Distributions = () => {
           <select
             name="status"
             onChange={handleChange}
+            required
             // onChange={handleStatus}
           >
             <option value="served">Served</option>
@@ -166,6 +173,7 @@ const Distributions = () => {
             rows={2}
             column={3}
             type="text"
+            required
             //   onChange={handleClass}
           />
           <br />
